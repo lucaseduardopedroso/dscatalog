@@ -1,4 +1,4 @@
-package com.devsuperior.controller;
+package com.devsuperior.dscatalog.controller;
 
 import java.util.ArrayList;
 import java.util.List;
