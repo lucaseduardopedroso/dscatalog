@@ -17,11 +17,11 @@ public class ProductRepositoryTests {
 
     @Test
     public void deleteShouldDeleteObjectWhenIdExists() {
-        long exintingId = 1L;
+        long existingId = 1L;
 
-        repository.deleteById(exintingId);
+        repository.deleteById(existingId);
 
-        Optional<Product> result = repository.findById(exintingId);
+        Optional<Product> result = repository.findById(existingId);
         Assertions.assertFalse(result.isPresent());
     }
 }
