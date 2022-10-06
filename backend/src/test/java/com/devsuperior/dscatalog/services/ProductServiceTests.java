@@ -49,7 +49,7 @@ public class ProductServiceTests {
         product = Factory.createProduct();
         page = new PageImpl<>(List.of(product));
 
-        //Configura os comportamentos esperados do objeto mockado
+        //Configura os comportamentos esperados dos objetos mockados
 
         //FindAll
         Mockito.when(repository.findAll((Pageable)ArgumentMatchers.any())).thenReturn(page);
