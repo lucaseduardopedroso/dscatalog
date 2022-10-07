@@ -37,7 +37,7 @@ public class ProductServiceTests {
 
     //Mock: Não carrega o contexto da aplicação
     @Mock
-    private ProductRepository repository;
+    private ProductRepository productRepository;
     @Mock
     private CategoryRepository categoryRepository;
 
@@ -62,25 +62,25 @@ public class ProductServiceTests {
         //Configura os comportamentos esperados dos objetos mockados
 
         //FindAll
-        Mockito.when(repository.findAll((Pageable)ArgumentMatchers.any())).thenReturn(page);
+        Mockito.when(productRepository.findAll((Pageable)ArgumentMatchers.any())).thenReturn(page);
 
         //FindById
-        Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(product));
-        Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
+        Mockito.when(productRepository.findById(existingId)).thenReturn(Optional.of(product));
+        Mockito.when(productRepository.findById(nonExistingId)).thenReturn(Optional.empty());
 
         //Save
-        Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(product);
+        Mockito.when(productRepository.save(ArgumentMatchers.any())).thenReturn(product);
 
         //getReferenceById
-        Mockito.when(repository.getReferenceById(existingId)).thenReturn(product);
-        Mockito.when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+        Mockito.when(productRepository.getReferenceById(existingId)).thenReturn(product);
+        Mockito.when(productRepository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
         Mockito.when(categoryRepository.getReferenceById(existingId)).thenReturn(category);
         Mockito.when(categoryRepository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
 
         //DeleteById
-        Mockito.doNothing().when(repository).deleteById(existingId);
-        Mockito.doThrow(ResourceNotFoundException.class).when(repository).deleteById(nonExistingId);
-        Mockito.doThrow(DataIntegrityViolationException.class).when(repository).deleteById(dependentId);
+        Mockito.doNothing().when(productRepository).deleteById(existingId);
+        Mockito.doThrow(ResourceNotFoundException.class).when(productRepository).deleteById(nonExistingId);
+        Mockito.doThrow(DataIntegrityViolationException.class).when(productRepository).deleteById(dependentId);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ProductServiceTests {
             service.delete(existingId);
         });
 
-        Mockito.verify(repository, Mockito.times(1)).deleteById(existingId);
+        Mockito.verify(productRepository, Mockito.times(1)).deleteById(existingId);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class ProductServiceTests {
             service.delete(nonExistingId);
         });
 
-        Mockito.verify(repository, Mockito.times(1)).deleteById(nonExistingId);
+        Mockito.verify(productRepository, Mockito.times(1)).deleteById(nonExistingId);
     }
 
     @Test
@@ -110,7 +110,7 @@ public class ProductServiceTests {
             service.delete(dependentId);
         });
 
-        Mockito.verify(repository, Mockito.times(1)).deleteById(dependentId);
+        Mockito.verify(productRepository, Mockito.times(1)).deleteById(dependentId);
     }
 
     @Test
@@ -120,7 +120,7 @@ public class ProductServiceTests {
         Page<ProductDTO> result = service.findAllPaged(pageable);
 
         Assertions.assertNotNull(result);
-        Mockito.verify(repository, Mockito.times(1)).findAll(pageable);
+        Mockito.verify(productRepository, Mockito.times(1)).findAll(pageable);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ProductServiceTests {
         ProductDTO result = service.findById(existingId);
 
         Assertions.assertNotNull(result);
-        Mockito.verify(repository, Mockito.times(1)).findById(existingId);
+        Mockito.verify(productRepository, Mockito.times(1)).findById(existingId);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class ProductServiceTests {
             service.findById(nonExistingId);
         });
 
-        Mockito.verify(repository, Mockito.times(1)).findById(nonExistingId);
+        Mockito.verify(productRepository, Mockito.times(1)).findById(nonExistingId);
     }
 
     @Test
