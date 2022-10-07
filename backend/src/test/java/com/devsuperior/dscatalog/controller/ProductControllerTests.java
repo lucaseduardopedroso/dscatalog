@@ -128,4 +128,43 @@ public class ProductControllerTests{
                 
         result.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
+
+    @Test
+    public void insertShouldReturnProductDTOCreated() throws Exception{
+        
+        String jsonBody = objectMapper.writeValueAsString(productDTO);
+
+        ResultActions result = mockMvc
+                .perform(MockMvcRequestBuilders.post("/products")
+                //Corpo da requisição
+                .content(jsonBody)
+                //Define o tipo do corpo da requisição
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+        
+        result.andExpect(MockMvcResultMatchers.status().isCreated());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.name").exists());
+        result.andExpect(MockMvcResultMatchers.jsonPath("$.description").exists());
+    }
+
+    @Test
+    public void deleteShouldReturnNoContentWhenIdExists() throws Exception{
+        
+        ResultActions result = mockMvc
+                .perform(MockMvcRequestBuilders.delete("/products/{id}", existingId)
+                .accept(MediaType.APPLICATION_JSON));
+                
+        result.andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    public void deleteShouldReturnNotFoundWhenIdDoesNotExists() throws Exception{
+        
+        ResultActions result = mockMvc
+                .perform(MockMvcRequestBuilders.delete("/products/{id}", nonExistingId)
+                .accept(MediaType.APPLICATION_JSON));
+                
+        result.andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 }
