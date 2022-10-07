@@ -129,24 +129,24 @@ public class ProductControllerTests{
         result.andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
-    @Test
-    public void insertShouldReturnProductDTOCreated() throws Exception{
+    // @Test
+    // public void insertShouldReturnProductDTOCreated() throws Exception{
         
-        String jsonBody = objectMapper.writeValueAsString(productDTO);
+    //     String jsonBody = objectMapper.writeValueAsString(productDTO);
 
-        ResultActions result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/products")
-                //Corpo da requisição
-                .content(jsonBody)
-                //Define o tipo do corpo da requisição
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON));
+    //     ResultActions result = mockMvc
+    //             .perform(MockMvcRequestBuilders.post("/products")
+    //             //Corpo da requisição
+    //             .content(jsonBody)
+    //             //Define o tipo do corpo da requisição
+    //             .contentType(MediaType.APPLICATION_JSON)
+    //             .accept(MediaType.APPLICATION_JSON));
         
-        result.andExpect(MockMvcResultMatchers.status().isCreated());
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.name").exists());
-        result.andExpect(MockMvcResultMatchers.jsonPath("$.description").exists());
-    }
+    //     result.andExpect(MockMvcResultMatchers.status().isCreated());
+    //     result.andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
+    //     result.andExpect(MockMvcResultMatchers.jsonPath("$.name").exists());
+    //     result.andExpect(MockMvcResultMatchers.jsonPath("$.description").exists());
+    // }
 
     @Test
     public void deleteShouldReturnNoContentWhenIdExists() throws Exception{
