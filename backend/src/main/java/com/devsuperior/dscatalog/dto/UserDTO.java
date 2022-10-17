@@ -4,16 +4,26 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 import com.devsuperior.dscatalog.entities.User;
 
 public class UserDTO implements Serializable{
     private static final long serialVersionUID = 1L;
     private Long id;
+    
+    @NotBlank(message = "First name can't be empty")
     private String firstName;
+    
+    @NotBlank(message = "Last name can't be empty")
     private String lastName;
-    private String email;
-    private String password;
 
+    @Email(message = "Invalid email")
+    private String email;
+
+    private String password;
     Set<RoleDTO> roles = new HashSet<>();
 
     public UserDTO() {
