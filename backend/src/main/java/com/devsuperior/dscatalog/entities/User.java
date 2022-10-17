@@ -14,10 +14,13 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
     private String lastName;
+
     @Column(unique = true)
     private String email;
+    
     private String password;
     
     //fetch garante que os dados de perfis (roles) serão carregados junto com o usuário 
