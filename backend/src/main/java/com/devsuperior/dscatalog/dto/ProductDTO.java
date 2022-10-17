@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
@@ -26,7 +27,7 @@ public class ProductDTO implements Serializable{
     @NotBlank(message = "Description can't be empty")
     private String description;
     
-    @PositiveOrZero(message = "Price must be positive")
+    @Positive(message = "Price must be positive")
     private Double price;
     
     private String imgUrl;
