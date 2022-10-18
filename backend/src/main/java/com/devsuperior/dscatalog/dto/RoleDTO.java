@@ -2,8 +2,6 @@ package com.devsuperior.dscatalog.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
 import com.devsuperior.dscatalog.entities.Role;
 
 public class RoleDTO implements Serializable{
